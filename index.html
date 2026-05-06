@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Marketing Audit | Small Cap Digital</title>
+<meta name="description" content="Get a free AI-powered marketing audit. Scored across 6 key areas with a 90-day action plan — in under 60 seconds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#2ecc40;
+  --green-dim:#1a7a26;
+  --black:#0d0d0d;
+  --card:#111;
+  --border:#1e1e1e;
+  --text:#d0ddd0;
+  --muted:#8fa98f;
+  --red:#e74c3c;
+  --yellow:#f1c40f;
+  --orange:#e67e22;
+}
+html,body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+
+/* ── VIEWS ── */
+.view{display:none;}
+.view.active{display:block;}
+
+/* ── HEADER ── */
+#site-header{background:#000;border-bottom:1px solid var(--border);padding:14px 20px;text-align:center;}
+.header-inner{display:flex;align-items:center;justify-content:center;gap:12px;}
+.header-logo-img{width:32px;height:32px;}
+.header-brand{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;}
+
+/* ── HERO ── */
+#hero{background:var(--black);padding:64px 24px 48px;text-align:center;}
+.hero-label{font-size:clamp(13px,2vw,16px);font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:18px;}
+.hero-h1{font-family:'Anton',sans-serif;font-size:clamp(52px,9vw,96px);line-height:0.95;text-transform:uppercase;margin-bottom:20px;}
+.hero-h1 .white{color:#fff;display:block;}
+.hero-h1 .grn{color:var(--green);display:block;}
+.hero-sub{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto 0;line-height:1.6;}
+
+/* ── STATS BAR ── */
+#stats-bar{padding:24px;margin:32px auto;max-width:700px;}
+.stats-inner{display:flex;justify-content:space-around;border:1px solid var(--border);border-radius:6px;padding:20px 24px;background:#0a0a0a;}
+.stat-num{font-family:'Anton',sans-serif;font-size:36px;color:var(--green);line-height:1;text-align:center;}
+.stat-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;text-align:center;}
+
+/* ── SECTION LAYOUTS ── */
+.section{padding:48px 24px;max-width:860px;margin:0 auto;}
+.section-tag{font-size:15px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.section-title{font-family:'Anton',sans-serif;font-size:clamp(42px,6vw,68px);text-transform:uppercase;color:#fff;line-height:1.05;margin-bottom:16px;}
+.section-body{font-size:15px;color:var(--muted);line-height:1.7;max-width:600px;margin-bottom:32px;}
+
+/* ── FEATURE CARDS ── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.feature-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:20px;}
+.feature-icon{font-size:20px;margin-bottom:10px;}
+.feature-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
+.feature-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.step-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:24px 20px;}
+.step-num{font-family:'Anton',sans-serif;font-size:32px;color:var(--green);line-height:1;margin-bottom:10px;}
+.step-title{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.price-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:22px 18px;position:relative;}
+.price-card.featured{border-color:var(--green);background:#0a1a0a;}
+.featured-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:20px;white-space:nowrap;}
+.price-tier{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.price-amount{font-family:'Anton',sans-serif;font-size:36px;color:#fff;line-height:1;margin-bottom:14px;}
+.price-amount span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;color:var(--muted);}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.price-features li{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:7px;line-height:1.4;}
+.price-features li::before{content:"—";color:var(--green);flex-shrink:0;}
+
+/* ── FORM SECTION ── */
+#form-section{padding:48px 24px 64px;max-width:860px;margin:0 auto;}
+.form-tag{font-size:15px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.form-title{font-family:'Anton',sans-serif;font-size:clamp(28px,4vw,42px);text-transform:uppercase;color:#fff;margin-bottom:8px;}
+.form-sub{font-size:14px;color:var(--muted);margin-bottom:28px;}
+.form-error{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:#e74c3c;font-size:13px;padding:12px 16px;border-radius:6px;margin-bottom:20px;display:none;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.field label .req{color:var(--green);}
+.field input,.field select,.field textarea{background:#111;border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 14px;border-radius:6px;width:100%;outline:none;transition:border-color 0.2s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa98f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.field select option{background:#111;}
+.field textarea{min-height:76px;resize:vertical;}
+.submit-wrap{margin-top:28px;text-align:center;}
+.btn-submit{background:var(--green);color:#000;border:none;border-radius:6px;padding:18px;width:100%;max-width:560px;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+.btn-submit:hover{background:#27ae38;}
+.submit-note{font-size:12px;color:var(--muted);margin-top:10px;}
+
+/* ── DIVIDER ── */
+.section-divider{border:none;border-top:1px solid var(--border);max-width:860px;margin:0 auto;}
+
+/* ── LOADING ── */
+#loading-view{text-align:center;padding:120px 24px;}
+.spinner{width:56px;height:56px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 28px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#loading-view h2{font-family:'Anton',sans-serif;font-size:28px;color:#fff;text-transform:uppercase;margin-bottom:10px;}
+#load-status{font-size:14px;color:var(--muted);transition:opacity 0.3s;}
+.load-steps{display:flex;flex-direction:column;gap:10px;max-width:300px;margin:32px auto 0;text-align:left;}
+.load-step{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);}
+.load-step.done{color:var(--green);}
+.step-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0;}
+.load-step.done .step-dot,.load-step.active .step-dot{background:var(--green);}
+
+/* ── RESULTS ── */
+#results-view{padding-bottom:80px;}
+.results-header{text-align:center;padding:48px 24px 32px;background:var(--black);}
+.results-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.results-biz{font-family:'Anton',sans-serif;font-size:clamp(28px,5vw,52px);color:#fff;text-transform:uppercase;margin-bottom:4px;}
+.results-meta{font-size:13px;color:var(--muted);}
+.results-body{max-width:860px;margin:0 auto;padding:0 24px;}
+
+/* Overall score */
+.overall-card{background:#111;border:1px solid var(--border);border-radius:10px;padding:36px;text-align:center;margin-bottom:24px;}
+.overall-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.score-ring{position:relative;width:130px;height:130px;margin:0 auto 16px;}
+.score-ring svg{width:130px;height:130px;transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--border);stroke-width:8;}
+.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease;}
+.score-number{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Anton',sans-serif;font-size:44px;line-height:1;}
+.overall-verdict{font-size:16px;font-weight:600;color:#fff;margin-bottom:8px;}
+.overall-summary{font-size:14px;color:var(--muted);line-height:1.7;max-width:540px;margin:0 auto;}
+
+/* Score grid */
+.scores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+.score-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:20px 16px;}
+.sc-name{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sc-row{display:flex;align-items:center;gap:10px;}
+.sc-num{font-family:'Anton',sans-serif;font-size:26px;min-width:40px;}
+.sc-track{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+.sc-fill{height:100%;border-radius:3px;transition:width 1s ease;}
+.sc-snippet{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;}
+
+/* Analysis */
+.analysis-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:28px;margin-bottom:16px;}
+.analysis-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.analysis-icon{font-size:18px;}
+.analysis-title{font-family:'Anton',sans-serif;font-size:18px;color:#fff;text-transform:uppercase;}
+.analysis-score-badge{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;margin-left:auto;}
+.analysis-body{font-size:14px;color:var(--muted);line-height:1.8;}
+
+/* 90-day plan */
+.plan-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:28px;margin-bottom:24px;}
+.plan-title{font-family:'Anton',sans-serif;font-size:22px;color:#fff;text-transform:uppercase;margin-bottom:22px;}
+.phase{margin-bottom:22px;}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.phase-items{display:flex;flex-direction:column;gap:8px;}
+.check-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.5;}
+.checkbox{width:16px;height:16px;border:1.5px solid var(--green);border-radius:3px;flex-shrink:0;margin-top:1px;}
+
+/* CTA */
+.cta-card{background:linear-gradient(135deg,#0d1f10,#0a1a0d);border:1px solid rgba(46,204,64,0.3);border-radius:10px;padding:40px;text-align:center;margin-top:28px;}
+.cta-card h3{font-family:'Anton',sans-serif;font-size:28px;color:#fff;text-transform:uppercase;margin-bottom:10px;}
+.cta-card p{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7;max-width:460px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.cta-primary{background:var(--green);color:#000;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;border:none;border-radius:50px;cursor:pointer;text-decoration:none;display:inline-block;}
+.cta-secondary{background:transparent;color:var(--green);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 24px;border:1px solid rgba(46,204,64,0.4);border-radius:50px;cursor:pointer;text-decoration:none;display:inline-block;}
+.restart-wrap{text-align:center;margin-top:20px;}
+.btn-restart{background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:10px 24px;border:1px solid var(--border);border-radius:50px;cursor:pointer;}
+
+/* Footer */
+#site-footer{background:#000;border-top:1px solid var(--border);padding:24px;text-align:center;}
+#site-footer p{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+#site-footer a{color:var(--green);text-decoration:none;}
+
+/* Responsive */
+@media(max-width:640px){
+  .form-grid,.features-grid,.steps-grid,.pricing-grid,.scores-grid{grid-template-columns:1fr;}
+  .field.full{grid-column:1;}
+  .pricing-grid{grid-template-columns:1fr 1fr;}
+  .stats-inner{gap:16px;flex-wrap:wrap;}
+}
+@media(max-width:400px){
+  .pricing-grid,.scores-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     FORM / LANDING PAGE VIEW
+════════════════════════════════════════ -->
+<div id="form-view" class="view active">
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-label">Free AI-Powered Analysis</div>
+    <h1 class="hero-h1">
+      <span class="white">Your Marketing.</span>
+      <span class="grn">Audited by AI.</span>
+    </h1>
+    <p class="hero-sub">Score your digital presence across 6 key areas and get a clear action plan — in under 60 seconds!</p>
+  </div>
+
+  <!-- STATS BAR -->
+  <div id="stats-bar">
+    <div class="stats-inner">
+      <div><div class="stat-num">6</div><div class="stat-label">Areas Analyzed</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">Pricing Tiers</div></div>
+      <div><div class="stat-num">60s</div><div class="stat-label">To Results</div></div>
+      <div><div class="stat-num">Free</div><div class="stat-label">To Start</div></div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="section">
+    <div class="section-tag">What You Get</div>
+    <div class="section-title">A Complete Digital Marketing Health Check</div>
+    <div class="section-body">Our AI analyzes your business across every critical marketing channel and delivers specific, actionable recommendations — not generic advice you have heard a thousand times.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">SEO &amp; Search</div>
+        <div class="feature-desc">Visibility gaps, keyword opportunities, and technical issues holding you back.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Social Media</div>
+        <div class="feature-desc">Platform presence, engagement quality, and social posting cadence.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✍️</div>
+        <div class="feature-title">Content Strategy</div>
+        <div class="feature-desc">Content gaps, messaging clarity, and lead-generating opportunities.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Paid Advertising</div>
+        <div class="feature-desc">Ad efficiency, targeting gaps, and conversion improvement areas.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Conversion Optimization</div>
+        <div class="feature-desc">Where you lose customers and real improvements to seal the gaps.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">Competitive Position</div>
+        <div class="feature-desc">Where you stand versus competitors and exactly where to attack.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-tag">How It Works</div>
+    <div class="section-title">Three Steps to Clarity</div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Tell Us About Your Business</div>
+        <div class="step-desc">Fill out the quick form below — takes about 2 minutes. The more detail, the sharper the analysis.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">AI Analyzes Your Marketing</div>
+        <div class="step-desc">Claude AI scores your digital presence across all 6 areas and identifies your biggest opportunities.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Get Your Action Plan</div>
+        <div class="step-desc">Receive a complete 90-day phased action plan to implement — starting today.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PRICING -->
+  <div class="section">
+    <div class="section-tag">Pricing</div>
+    <div class="section-title">Simple, Transparent Pricing</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Free</div>
+        <div class="price-amount">$0</div>
+        <ul class="price-features">
+          <li>Instant overall score</li>
+          <li>6 area score breakdown</li>
+          <li>Executive summary</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">$99</div>
+        <ul class="price-features">
+          <li>Full report on your 1 biggest problem area</li>
+          <li>Short-term action roadmap</li>
+          <li>1 rescore after changes</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">MOST POPULAR</div>
+        <div class="price-tier">Growth</div>
+        <div class="price-amount">$249</div>
+        <ul class="price-features">
+          <li>Full report on top 3 focus areas</li>
+          <li>Short-term action roadmap</li>
+          <li>2 rescores after changes</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Full Audit</div>
+        <div class="price-amount">$399</div>
+        <ul class="price-features">
+          <li>Complete report — all 6 areas</li>
+          <li>90-day prioritized plan</li>
+          <li>3 rescores after changes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- FORM -->
+  <div id="form-section">
+    <div class="form-tag">Get Started</div>
+    <div class="form-title">Run Your Free Audit</div>
+    <div class="form-sub">Fill in what you know — the more detail, the sharper the analysis.</div>
+    <div id="form-error" class="form-error"></div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Business Name <span class="req">*</span></label>
+        <input type="text" id="f-biz" placeholder="Your business name" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label>Website URL</label>
+        <input type="text" id="f-url" placeholder="https://yoursite.com">
+      </div>
+      <div class="field">
+        <label>Industry <span class="req">*</span></label>
+        <select id="f-industry">
+          <option value="">Select your industry…</option>
+          <option>Restaurant / Hospitality</option>
+          <option>B2B SaaS / Technology</option>
+          <option>Home Services / Contractors</option>
+          <option>Professional Services</option>
+          <option>E-commerce / Retail</option>
+          <option>Real Estate / Mortgage</option>
+          <option>Healthcare / Medical</option>
+          <option>Financial Services</option>
+          <option>Manufacturing / Industrial</option>
+          <option>Non-Profit</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Annual Revenue Range</label>
+        <select id="f-revenue">
+          <option value="">Select range…</option>
+          <option>Under $250K</option>
+          <option>$250K – $1M</option>
+          <option>$1M – $5M</option>
+          <option>$5M – $25M</option>
+          <option>$25M – $100M</option>
+          <option>Over $100M</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Target Audience</label>
+        <input type="text" id="f-audience" placeholder="e.g. Small business owners in the Northeast, ages 35–55">
+      </div>
+      <div class="field full">
+        <label>CRM / MarTech Stack</label>
+        <input type="text" id="f-martech" placeholder="e.g. HubSpot, Mailchimp, Salesforce, or 'nothing yet'">
+      </div>
+      <div class="field full">
+        <label>Top 3 Competitors</label>
+        <input type="text" id="f-competitors" placeholder="e.g. Competitor A, Competitor B, Competitor C">
+      </div>
+      <div class="field full">
+        <label>Current Marketing Channels</label>
+        <input type="text" id="f-channels" placeholder="e.g. SEO, Facebook ads, email newsletter, word of mouth">
+      </div>
+      <div class="field">
+        <label>Monthly Marketing Budget</label>
+        <select id="f-budget">
+          <option value="">Select range…</option>
+          <option>Under $500</option>
+          <option>$500 – $2,000</option>
+          <option>$2,000 – $5,000</option>
+          <option>$5,000 – $15,000</option>
+          <option>Over $15,000</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Monthly Ad Spend</label>
+        <select id="f-adspend">
+          <option value="">Select range…</option>
+          <option>$0 (none)</option>
+          <option>Under $500</option>
+          <option>$500 – $2,000</option>
+          <option>$2,000 – $10,000</option>
+          <option>Over $10,000</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Monthly Lead Volume</label>
+        <select id="f-leads">
+          <option value="">Select range…</option>
+          <option>0–10 leads/mo</option>
+          <option>10–50 leads/mo</option>
+          <option>50–200 leads/mo</option>
+          <option>200–1,000 leads/mo</option>
+          <option>1,000+ leads/mo</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Average Sales Cycle</label>
+        <select id="f-salescycle">
+          <option value="">Select…</option>
+          <option>Immediate / impulse</option>
+          <option>1–7 days</option>
+          <option>1–4 weeks</option>
+          <option>1–3 months</option>
+          <option>3–12 months</option>
+          <option>Over 12 months</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Biggest Marketing Challenge</label>
+        <textarea id="f-challenge" placeholder="e.g. We get traffic but nobody converts. We don't know which channels are actually working…"></textarea>
+      </div>
+      <div class="field full">
+        <label>Anything Else We Should Know?</label>
+        <textarea id="f-roadblocks" placeholder="Brand campaigns, upcoming launches, budget constraints, anything helpful…"></textarea>
+      </div>
+    </div>
+    <div class="submit-wrap">
+      <button class="btn-submit" id="btn-submit">Run My Free Audit →</button>
+      <div class="submit-note">No credit card required. Results in ~60 seconds.</div>
+    </div>
+  </div>
+
+</div><!-- /form-view -->
+
+<!-- ═══════════════════════════════════════
+     LOADING VIEW
+════════════════════════════════════════ -->
+<div id="loading-view" class="view">
+  <div style="text-align:center;padding:120px 24px;">
+    <div class="spinner"></div>
+    <h2 style="font-family:'Anton',sans-serif;font-size:28px;color:#fff;text-transform:uppercase;margin-bottom:10px;">Analyzing Your Marketing…</h2>
+    <div id="load-status" style="font-size:14px;color:var(--muted);">Initializing audit engine…</div>
+    <div class="load-steps">
+      <div class="load-step" id="ls-1"><div class="step-dot"></div>Scanning digital footprint</div>
+      <div class="load-step" id="ls-2"><div class="step-dot"></div>Evaluating SEO signals</div>
+      <div class="load-step" id="ls-3"><div class="step-dot"></div>Scoring social presence</div>
+      <div class="load-step" id="ls-4"><div class="step-dot"></div>Reviewing content strategy</div>
+      <div class="load-step" id="ls-5"><div class="step-dot"></div>Benchmarking competitors</div>
+      <div class="load-step" id="ls-6"><div class="step-dot"></div>Building 90-day action plan</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     RESULTS VIEW
+════════════════════════════════════════ -->
+<div id="results-view" class="view">
+  <div class="results-header">
+    <div class="results-eyebrow">AI Marketing Audit Report</div>
+    <div class="results-biz" id="res-biz-name">—</div>
+    <div class="results-meta" id="res-biz-meta"></div>
+  </div>
+  <div class="results-body">
+    <div class="overall-card">
+      <div class="overall-label">Overall Score</div>
+      <div class="score-ring">
+        <svg viewBox="0 0 130 130">
+          <circle class="ring-bg" cx="65" cy="65" r="54"/>
+          <circle class="ring-fill" id="ring-fill" cx="65" cy="65" r="54" stroke-dasharray="339" stroke-dashoffset="339"/>
+        </svg>
+        <div class="score-number" id="overall-num">—</div>
+      </div>
+      <div class="overall-verdict" id="overall-verdict"></div>
+      <div class="overall-summary" id="overall-summary"></div>
+    </div>
+    <div class="scores-grid" id="scores-grid"></div>
+    <div id="analysis-wrap"></div>
+    <div id="plan-wrap"></div>
+    <div class="cta-card">
+      <h3>Ready to Implement This?</h3>
+      <p>Let's turn these findings into real revenue growth for your business.</p>
+      <div class="cta-btns">
+        <a href="mailto:paul.w.bruce@gmail.com?subject=Marketing%20Audit%20Strategy%20Session" class="cta-primary">Book a Strategy Session</a>
+        <a href="https://smallcapdigital.com" target="_blank" class="cta-secondary">View Services</a>
+      </div>
+    </div>
+    <div class="restart-wrap">
+      <button class="btn-restart" id="btn-restart">Run Another Audit</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div id="site-footer">
+  <p>Powered by Claude AI &amp; <a href="https://smallcapdigital.com" target="_blank">Small Cap Digital</a></p>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var KEYS   = ['seo','social','content','ads','conversion','competitive'];
+var LABELS = ['SEO & Search Visibility','Social Media Presence','Content Strategy','Paid Advertising','Conversion Optimization','Competitive Positioning'];
+var ICONS  = ['🔍','📱','✍️','💰','⚡','🏆'];
+
+var LOAD_MSGS = ['Scanning digital footprint…','Evaluating SEO signals…','Scoring social presence…','Reviewing content strategy…','Benchmarking competitors…','Building your action plan…','Compiling report…'];
+
+function show(id){
+  ['form-view','loading-view','results-view'].forEach(function(v){
+    var el=document.getElementById(v);
+    if(el) el.className='view'+(v===id?' active':'');
+  });
+  window.scrollTo(0,0);
+}
+
+function scoreColor(n){ return n>=70?'#2ecc40':n>=45?'#f1c40f':'#e74c3c'; }
+
+function verdict(n){
+  if(n>=80) return 'Strong Foundation — Room to Optimize';
+  if(n>=65) return 'Solid Base — Several Quick Wins Available';
+  if(n>=50) return 'Moderate Performance — Significant Upside';
+  if(n>=35) return 'Underperforming — Needs Immediate Attention';
+  return 'Critical Gaps — Action Required Now';
+}
+
+var loadInt=null, stepInt=null;
+
+function startLoading(){
+  var idx=0;
+  loadInt=setInterval(function(){
+    idx=(idx+1)%LOAD_MSGS.length;
+    var el=document.getElementById('load-status');
+    if(el){el.style.opacity='0';setTimeout(function(){el.textContent=LOAD_MSGS[idx];el.style.opacity='1';},200);}
+  },2200);
+  var si=0;
+  stepInt=setInterval(function(){
+    var steps=document.querySelectorAll('.load-step');
+    if(si>0&&steps[si-1]) steps[si-1].className='load-step done';
+    if(steps[si]) steps[si].className='load-step active';
+    si++;
+    if(si>=steps.length) clearInterval(stepInt);
+  },1800);
+}
+
+function stopLoading(){
+  clearInterval(loadInt); clearInterval(stepInt);
+  document.querySelectorAll('.load-step').forEach(function(s){s.className='load-step done';});
+}
+
+function renderRing(score){
+  var c=2*Math.PI*54;
+  var el=document.getElementById('ring-fill');
+  if(!el) return;
+  el.style.stroke=scoreColor(score);
+  setTimeout(function(){el.style.strokeDashoffset=c*(1-score/100);},100);
+}
+
+function renderScores(scores, snippets){
+  var g=document.getElementById('scores-grid');
+  if(!g) return;
+  g.innerHTML='';
+  KEYS.forEach(function(k,i){
+    var v=scores[k]||0;
+    var col=scoreColor(v);
+    var card=document.createElement('div');
+    card.className='score-card';
+    card.innerHTML='<div class="sc-name">'+ICONS[i]+' '+LABELS[i]+'</div>'+
+      '<div class="sc-row"><div class="sc-num" style="color:'+col+'">'+v+'</div>'+
+      '<div class="sc-track"><div class="sc-fill" style="width:0%;background:'+col+'" data-w="'+v+'"></div></div></div>'+
+      ((snippets&&snippets[k])?'<div class="sc-snippet">'+snippets[k]+'</div>':'');
+    g.appendChild(card);
+  });
+  setTimeout(function(){
+    document.querySelectorAll('.sc-fill').forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});
+  },150);
+}
+
+function renderAnalysis(scores, analysis){
+  var w=document.getElementById('analysis-wrap');
+  if(!w) return;
+  w.innerHTML='';
+  KEYS.forEach(function(k,i){
+    var txt=analysis[k]||''; if(!txt) return;
+    var v=scores[k]||0;
+    var d=document.createElement('div');
+    d.className='analysis-card';
+    d.innerHTML='<div class="analysis-head">'+
+      '<div class="analysis-icon">'+ICONS[i]+'</div>'+
+      '<div class="analysis-title">'+LABELS[i]+'</div>'+
+      '<div class="analysis-score-badge" style="color:'+scoreColor(v)+'">'+v+' / 100</div>'+
+      '</div><div class="analysis-body">'+txt+'</div>';
+    w.appendChild(d);
+  });
+}
+
+function renderPlan(plan){
+  var w=document.getElementById('plan-wrap');
+  if(!w||!plan) return;
+  var phases=[
+    {k:'phase1',l:'Phase 1: Foundation (Days 1–30)'},
+    {k:'phase2',l:'Phase 2: Build & Amplify (Days 31–60)'},
+    {k:'phase3',l:'Phase 3: Scale & Optimize (Days 61–90)'}
+  ];
+  var html='<div class="plan-card"><div class="plan-title">📋 90-Day Action Plan</div>';
+  phases.forEach(function(ph){
+    var items=plan[ph.k]||[]; if(!items.length) return;
+    html+='<div class="phase"><div class="phase-label">'+ph.l+'</div><div class="phase-items">';
+    items.forEach(function(item){
+      html+='<div class="check-item"><div class="checkbox"></div><div>'+item+'</div></div>';
+    });
+    html+='</div></div>';
+  });
+  html+='</div>';
+  w.innerHTML=html;
+}
+
+async function runAudit(data){
+  show('loading-view');
+  startLoading();
+
+  var sys='You are an elite digital marketing strategist with 20 years of experience. You work for Small Cap Digital. Your audits are direct, honest, and actionable.\n\nRespond ONLY with a valid JSON object. No markdown, no backticks, no preamble.\n\n{"overallScore":number,"scores":{"seo":n,"social":n,"content":n,"ads":n,"conversion":n,"competitive":n},"snippets":{"seo":"1 sentence","social":"1 sentence","content":"1 sentence","ads":"1 sentence","conversion":"1 sentence","competitive":"1 sentence"},"summary":"3-4 sentence executive summary","analysis":{"seo":"4-6 sentences","social":"4-6 sentences","content":"4-6 sentences","ads":"4-6 sentences","conversion":"4-6 sentences","competitive":"4-6 sentences"},"actionPlan":{"phase1":["action","action","action","action"],"phase2":["action","action","action","action"],"phase3":["action","action","action","action"]}}';
+
+  var msg='Run a full marketing audit:\n\nBusiness: '+data.biz+'\nWebsite: '+(data.url||'Not provided')+'\nIndustry: '+data.industry+'\nRevenue: '+(data.revenue||'Not provided')+'\nAudience: '+(data.audience||'Not provided')+'\nMarTech: '+(data.martech||'Not provided')+'\nCompetitors: '+(data.competitors||'Not provided')+'\nChannels: '+(data.channels||'Not provided')+'\nBudget: '+(data.budget||'Not provided')+'\nAd Spend: '+(data.adspend||'Not provided')+'\nLeads/mo: '+(data.leads||'Not provided')+'\nSales Cycle: '+(data.salescycle||'Not provided')+'\nChallenge: '+(data.challenge||'Not provided')+'\nRoadblocks: '+(data.roadblocks||'Not provided');
+
+  var result=null;
+  try{
+    var ctrl=new AbortController();
+    var t=setTimeout(function(){ctrl.abort();},55000);
+    var payload={model:'claude-haiku-4-5-20251001',max_tokens:2000,system:sys,messages:[{role:'user',content:msg}]};
+    var resp=await fetch('/.netlify/functions/audit',{
+      method:'POST',signal:ctrl.signal,
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    clearTimeout(t);
+    if(!resp.ok) throw new Error('API '+resp.status);
+    var json=await resp.json();
+    var raw=(json.content||[]).map(function(b){return b.text||'';}).join('');
+    raw=raw.replace(/```json|```/g,'').trim();
+    result=JSON.parse(raw);
+  }catch(e){
+    stopLoading();
+    show('form-view');
+    var err=document.getElementById('form-error');
+    if(err){err.textContent='Something went wrong. Please try again. ('+e.message+')';err.style.display='block';}
+    return;
+  }
+
+  stopLoading();
+
+  document.getElementById('res-biz-name').textContent=data.biz;
+  document.getElementById('res-biz-meta').textContent=[data.industry,data.url].filter(Boolean).join(' — ');
+
+  var ov=result.overallScore||0;
+  var numEl=document.getElementById('overall-num');
+  numEl.textContent=ov;
+  numEl.style.color=scoreColor(ov);
+  renderRing(ov);
+  document.getElementById('overall-verdict').textContent=verdict(ov);
+  document.getElementById('overall-summary').textContent=result.summary||'';
+  renderScores(result.scores||{},result.snippets||{});
+  renderAnalysis(result.scores||{},result.analysis||{});
+  if(result.actionPlan) renderPlan(result.actionPlan);
+  show('results-view');
+}
+
+document.getElementById('btn-submit').addEventListener('click',function(){
+  var biz=(document.getElementById('f-biz').value||'').trim();
+  var ind=(document.getElementById('f-industry').value||'').trim();
+  var err=document.getElementById('form-error');
+  err.style.display='none';
+  if(!biz||!ind){
+    err.textContent='Please fill in Business Name and Industry to run your audit.';
+    err.style.display='block';
+    err.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  runAudit({
+    biz:biz,
+    url:(document.getElementById('f-url').value||'').trim(),
+    industry:ind,
+    revenue:document.getElementById('f-revenue').value,
+    audience:(document.getElementById('f-audience').value||'').trim(),
+    martech:(document.getElementById('f-martech').value||'').trim(),
+    competitors:(document.getElementById('f-competitors').value||'').trim(),
+    channels:(document.getElementById('f-channels').value||'').trim(),
+    budget:document.getElementById('f-budget').value,
+    adspend:document.getElementById('f-adspend').value,
+    leads:document.getElementById('f-leads').value,
+    salescycle:document.getElementById('f-salescycle').value,
+    challenge:(document.getElementById('f-challenge').value||'').trim(),
+    roadblocks:(document.getElementById('f-roadblocks').value||'').trim()
+  });
+});
+
+document.getElementById('btn-restart').addEventListener('click',function(){
+  document.getElementById('form-error').style.display='none';
+  document.querySelectorAll('.load-step').forEach(function(s){s.className='load-step';});
+  show('form-view');
+});
+
+})();
+</script>
+</body>
+</html>
